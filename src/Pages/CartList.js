@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import CartItem from "../Components/CartItem";
 import CheckBox from "../Components/CheckBox";
 
-export default function CartList({ cartItems, filterItem }) {
+export default function CartList({ filterItem }) {
+  const cartItems = useSelector((store) => store.cartReducer);
   useEffect(() => {
     console.log("CartList render");
   });
@@ -32,12 +34,7 @@ export default function CartList({ cartItems, filterItem }) {
             <td />
           </CartHeader>
           {cartItems.map((e, i) => (
-            <CartItem
-              {...e}
-              key={e.product_img + i}
-              idx={i}
-              filterItem={filterItem}
-            />
+            <CartItem {...e} key={e.product_img + i} idx={i} />
           ))}
         </tbody>
       </CartTable>

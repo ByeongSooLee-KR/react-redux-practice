@@ -11,14 +11,6 @@ function Routes() {
     console.log("Routes render");
   });
 
-  const filterItem = (idx) => {
-    setCartItems(
-      cartItems.filter((_, i) => {
-        return i !== idx;
-      })
-    );
-  };
-
   const addToCart = (item) => {
     alert("장바구니에 추가되었습니다.");
     setCartItems([...cartItems, item]);
@@ -28,18 +20,8 @@ function Routes() {
     <Router>
       <Nav itemCount={cartItems.length} />
       <Switch>
-        <Route
-          exact
-          path="/"
-          component={() => <ProductList addToCart={addToCart} />}
-        />
-        <Route
-          exact
-          path="/cart"
-          component={() => (
-            <CartList cartItems={cartItems} filterItem={filterItem} />
-          )}
-        />
+        <Route exact path="/" component={() => <ProductList addToCart={addToCart} />} />
+        <Route exact path="/cart" component={() => <CartList cartItems={cartItems} />} />
       </Switch>
     </Router>
   );
